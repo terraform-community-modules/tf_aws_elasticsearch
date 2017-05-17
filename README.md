@@ -1,7 +1,7 @@
 tf_aws_elasticsearch
 ===========
 
-Terraform module for deploying and managing AWS ElasticSearch domains
+Terraform module for deploying and managing Amazon Elasticsearch Service
 
 
 ----------------------
