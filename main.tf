@@ -53,3 +53,4 @@ resource "aws_elasticsearch_domain_policy" "es_management_access" {
 }
 
 # vim: set et fenc= ff=unix ft=terraform sts=2 sw=2 ts=2 : 
+
