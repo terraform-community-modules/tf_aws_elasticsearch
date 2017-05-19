@@ -10,6 +10,12 @@ data "aws_iam_policy_document" "es_management_access" {
       "${aws_elasticsearch_domain.es.arn}/*",
     ]
 
+    principals {
+      type = "AWS"
+
+      identifiers = ["*"]
+    }
+
     condition {
       test     = "IpAddress"
       variable = "aws:SourceIp"
