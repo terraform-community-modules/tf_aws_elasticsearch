@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "es_management_access" {
     principals {
       type = "AWS"
 
-      identifiers = ["*"]
+      identifiers = ["${distinct(compact(var.management_iam_roles))}"]
     }
 
     condition {
