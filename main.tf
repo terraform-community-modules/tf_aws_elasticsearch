@@ -28,7 +28,7 @@ resource "aws_elasticsearch_domain" "es" {
     dedicated_master_enabled = "${var.instance_count >= 10 ? true : false}"
     dedicated_master_count   = 3
     dedicated_master_type    = "${var.dedicated_master_type ? var.dedicated_master_type : var.instance_type}"
-    zone_awareness_enabled   = "${var.zone_awareness}"
+    zone_awareness_enabled   = "${var.es_zone_awareness}"
   }
 
   # advanced_options {
