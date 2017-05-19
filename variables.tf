@@ -50,3 +50,4 @@ variable "snapshot_start_hour" {
 }
 
 # vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
+
