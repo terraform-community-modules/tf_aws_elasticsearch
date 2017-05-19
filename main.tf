@@ -1,5 +1,5 @@
 # Elasticsearch domain
-data "aws_iam_policy_document" "es_management_instance_access" {
+data "aws_iam_policy_document" "es_management_access" {
   statement {
     actions = [
       "es:*",
