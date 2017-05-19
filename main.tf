@@ -21,6 +21,7 @@ data "aws_iam_policy_document" "es_management_access" {
 resource "aws_elasticsearch_domain" "es" {
   domain_name           = "tf-${var.domain_name}"
   elasticsearch_version = "${var.es_version}"
+  access_policies       = "${data.aws_iam_policy_document.es_management_access.json}"
 
   cluster_config {
     instance_type            = "${var.instance_type}"
@@ -45,11 +46,6 @@ resource "aws_elasticsearch_domain" "es" {
   tags {
     Domain = "${var.domain_name}"
   }
-}
-
-resource "aws_elasticsearch_domain_policy" "es_management_access" {
-  domain_name     = "tf-${var.domain_name}"
-  access_policies = "${data.aws_iam_policy_document.es_management_access.json}"
 }
 
 # vim: set et fenc= ff=unix ft=terraform sts=2 sw=2 ts=2 : 
