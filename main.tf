@@ -7,6 +7,7 @@ data "aws_iam_policy_document" "es_management_access" {
 
     resources = [
       "${aws_elasticsearch_domain.es.arn}",
+      "${aws_elasticsearch_domain.es.arn}/*",
     ]
 
     condition {
