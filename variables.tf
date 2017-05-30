@@ -32,7 +32,7 @@ variable "management_iam_roles" {
 variable "management_public_ip_addresses" {
   description = "List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access."
   type        = "list"
-  default     = [""]
+  default     = []
 }
 
 variable "es_zone_awareness" {
