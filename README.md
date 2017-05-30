@@ -64,6 +64,8 @@ Authors
 Changelog
 =========
 
+0.0.2 - Bugfix (#1) which prevented module from executing correctly with variable defaults.
+
 0.0.1 - Initial release.
 
 License
