@@ -14,7 +14,7 @@ variable "instance_type" {
 }
 
 variable "instance_count" {
-  description = "Number of data nodes in the cluster (default 3)"
+  description = "Number of data nodes in the cluster (default 6)"
   default     = 6
 }
 
