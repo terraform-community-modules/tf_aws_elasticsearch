@@ -55,5 +55,14 @@ variable "snapshot_start_hour" {
   default     = 0
 }
 
+variable "vpc_options" {
+  description = "A map of supported vpc options"
+  type        = "map"
+  default     =  {
+    security_group_ids = []
+    subnet_ids         = []
+  }
+}
+
 # vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
 
