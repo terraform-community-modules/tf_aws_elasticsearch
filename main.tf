@@ -1,5 +1,6 @@
 # Elasticsearch domain
 data "aws_iam_policy_document" "es_management_access" {
+  count = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"   
   statement {
     actions = [
       "es:*",
@@ -26,6 +27,7 @@ data "aws_iam_policy_document" "es_management_access" {
 }
 
 resource "aws_elasticsearch_domain" "es" {
+  count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
   domain_name           = "tf-${var.domain_name}"
   elasticsearch_version = "${var.es_version}"
 
@@ -55,6 +57,7 @@ resource "aws_elasticsearch_domain" "es" {
 }
 
 resource "aws_elasticsearch_domain_policy" "es_management_access" {
+  count           = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
   domain_name     = "tf-${var.domain_name}"
   access_policies = "${data.aws_iam_policy_document.es_management_access.json}"
 }
