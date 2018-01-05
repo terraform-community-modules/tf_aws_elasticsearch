@@ -93,10 +93,11 @@ Authors
 =======
 
 [Steve Huff](https://github.com/hakamadare)
+[Alexander Gramovich](https://github.com/ggramal)
 
 Changelog
 =========
-0.0.3 - Add VPC support
+0.1.0 - Add VPC support
 
 0.0.2 - Bugfix (#1) which prevented module from executing correctly with variable defaults.
 
