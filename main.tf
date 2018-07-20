@@ -1,6 +1,7 @@
 # Elasticsearch domain
 data "aws_iam_policy_document" "es_management_access" {
-  count = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"   
+  count = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
+
   statement {
     actions = [
       "es:*",
@@ -51,9 +52,9 @@ resource "aws_elasticsearch_domain" "es" {
   snapshot_options {
     automated_snapshot_start_hour = "${var.snapshot_start_hour}"
   }
-  tags {
-    Domain = "${var.domain_name}"
-  }
+  tags = "${merge(var.tags, map(
+    "Domain", "${var.domain_name}"
+  ))}"
 }
 
 resource "aws_elasticsearch_domain_policy" "es_management_access" {
