@@ -37,10 +37,11 @@ None (but `domain_name` and `management_public_ip_addresses` are strongly recomm
 - `ebs_volume_size` - Size in GB of EBS volume to attach to each node and use for data storage.  If this parameter is set to 0 (the default), nodes will use instance storage.
 - `ebs_volume_type` - Storage class for EBS volumes.  Just use `gp2`.
 - `snapshot_start_hour` - Hour of the day (in UTC) at which to begin daily snapshots.
+- `tags` - Additional tags to apply to created resources
 - `vpc_options` - VPC related options. Adding or removing this configuration forces a new resource
-  
+
      `security_group_ids` - List of VPC Security Group IDs to be applied to the Elasticsearch domain endpoints.
-      
+
      `subnet_ids` - List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
 
 Usage

@@ -4,14 +4,14 @@ does not handle properly null/empty "vpc_options" */
 /*Need to use interpolation for output variables until issue #15605 is solved */
 
 locals {
-  es_arn      = "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.arn,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.arn,list("")),0)}"
-  es_endpoint = "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.endpoint,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.endpoint,list("")),0)}"
-  es_domain_id= "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.domain_id,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.domain_id,list("")),0)}"
+  es_arn       = "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.arn,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.arn,list("")),0)}"
+  es_endpoint  = "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.endpoint,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.endpoint,list("")),0)}"
+  es_domain_id = "${length(var.vpc_options["subnet_ids"]) > 0 ? element(concat(aws_elasticsearch_domain.es_vpc.*.domain_id,list("")),0) : element(concat(aws_elasticsearch_domain.es.*.domain_id,list("")),0)}"
 }
-
 
 data "aws_iam_policy_document" "es_vpc_management_access" {
   count = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
+
   statement {
     actions = [
       "es:*",
@@ -29,7 +29,6 @@ data "aws_iam_policy_document" "es_vpc_management_access" {
     }
   }
 }
-
 
 resource "aws_elasticsearch_domain" "es_vpc" {
   count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
@@ -49,8 +48,6 @@ resource "aws_elasticsearch_domain" "es_vpc" {
   # }
 
   vpc_options = ["${var.vpc_options}"]
-
-
   ebs_options {
     ebs_enabled = "${var.ebs_volume_size > 0 ? true : false}"
     volume_size = "${var.ebs_volume_size}"
@@ -59,9 +56,9 @@ resource "aws_elasticsearch_domain" "es_vpc" {
   snapshot_options {
     automated_snapshot_start_hour = "${var.snapshot_start_hour}"
   }
-  tags {
-    Domain = "${var.domain_name}"
-  }
+  tags = "${merge(var.tags, map(
+    "Domain", "${var.domain_name}"
+  ))}"
 }
 
 resource "aws_elasticsearch_domain_policy" "es_vpc_management_access" {
@@ -69,4 +66,3 @@ resource "aws_elasticsearch_domain_policy" "es_vpc_management_access" {
   domain_name     = "tf-${var.domain_name}"
   access_policies = "${data.aws_iam_policy_document.es_vpc_management_access.json}"
 }
-
