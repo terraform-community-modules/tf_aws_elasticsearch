@@ -23,6 +23,11 @@ variable "dedicated_master_type" {
   default     = false
 }
 
+variable "encrypt_at_rest" {
+  description = "Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false)"
+  default     = false
+}
+
 variable "management_iam_roles" {
   description = "List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access."
   type        = "list"
