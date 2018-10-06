@@ -57,7 +57,7 @@ variable "ebs_volume_type" {
 
 variable "kms_key_id" {
   description = "KMS key used for elasticsearch"
-  default = ""
+  default     = ""
 }
 
 variable "snapshot_start_hour" {
