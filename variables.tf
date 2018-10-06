@@ -55,6 +55,11 @@ variable "ebs_volume_type" {
   default     = "gp2"
 }
 
+variable "kms_key_id" {
+  description = "KMS key used for elasticsearch"
+  default = ""
+}
+
 variable "snapshot_start_hour" {
   description = "Hour at which automated snapshots are taken, in UTC (default 0)"
   default     = 0
