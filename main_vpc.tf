@@ -40,6 +40,21 @@ resource "aws_elasticsearch_domain" "es_vpc" {
     kms_key_id = "${var.kms_key_id}"
   }
 
+  log_publishing_options = [{
+      log_type                 = "INDEX_SLOW_LOGS"
+      cloudwatch_log_group_arn = "${var.index_slow_log_cloudwatch_log_group}"
+      enabled                  = "${var.index_slow_log_enabled}"
+    }, {
+      log_type                 = "SEARCH_SLOW_LOGS"
+      cloudwatch_log_group_arn = "${var.search_slow_logs_cloudwatch_log_group}"
+      enabled                  = "${var.search_slow_logs_enabled}"
+    }, {
+      log_type                 = "ES_APPLICATION_LOGS"
+      cloudwatch_log_group_arn = "${var.es_app_log_cloudwatch_log_group}"
+      enabled                  = "${var.es_app_log_enable}"
+    }
+  ]
+
   cluster_config {
     instance_type            = "${var.instance_type}"
     instance_count           = "${var.instance_count}"

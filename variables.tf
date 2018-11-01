@@ -81,5 +81,36 @@ variable "tags" {
   default     = {}
 }
 
+variable "index_slow_log_cloudwatch_log_group" {
+  description = "ARN for the CloudWatch log group to be use for the index slow logs"
+  default     = ""
+}
+
+variable "index_slow_log_enabled" {
+  description = "Enable the index slow logging (default false)"
+  default = false
+}
+
+variable "search_slow_logs_cloudwatch_log_group" {
+  description = "ARN for the CloudWatch log group to be use for the search slow logs"
+  default     = ""
+}
+
+variable "search_slow_logs_enabled" {
+  description = "Enable the search slow logging (default false)"
+  default     = false
+}
+
+variable "es_app_log_cloudwatch_log_group" {
+  description = "ARN for the CloudWatch log group to be use for the Elasticsearch application logs"
+  default     = ""
+}
+
+variable "es_app_log_enable" {
+  description = "Enable the Elasticsearch application logging (default false)"
+  default     = false
+}
+
+
 # vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
 
