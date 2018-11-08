@@ -91,12 +91,12 @@ variable "index_slow_log_enabled" {
   default = false
 }
 
-variable "search_slow_logs_cloudwatch_log_group" {
+variable "search_slow_log_cloudwatch_log_group" {
   description = "ARN for the CloudWatch log group to be use for the search slow logs"
   default     = ""
 }
 
-variable "search_slow_logs_enabled" {
+variable "search_slow_log_enabled" {
   description = "Enable the search slow logging (default false)"
   default     = false
 }

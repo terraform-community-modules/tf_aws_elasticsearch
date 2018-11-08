@@ -46,8 +46,8 @@ resource "aws_elasticsearch_domain" "es_vpc" {
       enabled                  = "${var.index_slow_log_enabled}"
     }, {
       log_type                 = "SEARCH_SLOW_LOGS"
-      cloudwatch_log_group_arn = "${var.search_slow_logs_cloudwatch_log_group}"
-      enabled                  = "${var.search_slow_logs_enabled}"
+      cloudwatch_log_group_arn = "${var.search_slow_log_cloudwatch_log_group}"
+      enabled                  = "${var.search_slow_log_enabled}"
     }, {
       log_type                 = "ES_APPLICATION_LOGS"
       cloudwatch_log_group_arn = "${var.es_app_log_cloudwatch_log_group}"

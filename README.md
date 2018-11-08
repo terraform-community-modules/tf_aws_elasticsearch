@@ -21,7 +21,7 @@ Several options affect the resilience and scalability of your Elasticsearch doma
 
 For a production deployment it may also make sense to use EBS volumes rather that instance storage; to do so, set `ebs_volume_size` greater than 0 and optionally specify a value for `ebs_volume_type` (right now the only supported values are `gp2` and `magnetic`).
 
-If enabling any of the logging options (`index_slow_log_enabled`, `search_slow_logs_enabled` or `es_app_log_enable`) you will need to have a `aws_iam_policy_document` that allows the Elasticsearch service to deliver logs to the log group with the following actions `logs:PutLogEvents` and `logs:CreateLogStream`.
+If enabling any of the logging options (`index_slow_log_enabled`, `search_slow_log_enabled` or `es_app_log_enable`) you will need to have a `aws_iam_policy_document` that allows the Elasticsearch service to deliver logs to the log group with the following actions `logs:PutLogEvents` and `logs:CreateLogStream`.
 
 ----------------------
 #### Required
@@ -47,8 +47,8 @@ None (but `domain_name` and `management_public_ip_addresses` are strongly recomm
      `subnet_ids` - List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
 - `index_slow_log_cloudwatch_log_group` - ARN for the CloudWatch log group to be use for the index slow logs.
 - `index_slow_log_enabled` - Enable or disable the index slow logging.
-- `search_slow_logs_cloudwatch_log_group` - ARN for the CloudWatch log group to be use for the search slow logs.
-- `search_slow_logs_enabled` - Enable or disable the search slow logging.
+- `search_slow_log_cloudwatch_log_group` - ARN for the CloudWatch log group to be use for the search slow logs.
+- `search_slow_log_enabled` - Enable or disable the search slow logging.
 - `es_app_log_cloudwatch_log_group` - ARN for the CloudWatch log group to be use for the Elasticsearch application logs.
 - `es_app_log_enable` - Enable or disable the Elasticsearch application logging.
 
