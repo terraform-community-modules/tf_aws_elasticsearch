@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "es_management_access" {
 
 resource "aws_elasticsearch_domain" "es" {
   count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
-  domain_name           = "tf-${var.domain_name}"
+  domain_name           = "${local.domain_name}"
   elasticsearch_version = "${var.es_version}"
 
   cluster_config {
@@ -53,13 +53,13 @@ resource "aws_elasticsearch_domain" "es" {
     automated_snapshot_start_hour = "${var.snapshot_start_hour}"
   }
   tags = "${merge(var.tags, map(
-    "Domain", "${var.domain_name}"
+    "Domain", "${local.domain_name}"
   ))}"
 }
 
 resource "aws_elasticsearch_domain_policy" "es_management_access" {
   count           = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
-  domain_name     = "tf-${var.domain_name}"
+  domain_name     = "${local.domain_name}"
   access_policies = "${data.aws_iam_policy_document.es_management_access.json}"
 }
 
