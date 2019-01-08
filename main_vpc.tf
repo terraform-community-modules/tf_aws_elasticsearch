@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "es_vpc_management_access" {
 
 resource "aws_elasticsearch_domain" "es_vpc" {
   count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
-  domain_name           = "tf-${var.domain_name}"
+  domain_name           = "${local.domain_name}"
   elasticsearch_version = "${var.es_version}"
 
   encrypt_at_rest = {
@@ -68,6 +68,6 @@ resource "aws_elasticsearch_domain" "es_vpc" {
 
 resource "aws_elasticsearch_domain_policy" "es_vpc_management_access" {
   count           = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
-  domain_name     = "tf-${var.domain_name}"
+  domain_name     = "${local.domain_name}"
   access_policies = "${data.aws_iam_policy_document.es_vpc_management_access.json}"
 }

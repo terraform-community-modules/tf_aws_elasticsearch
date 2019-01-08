@@ -26,7 +26,9 @@ For a production deployment it may also make sense to use EBS volumes rather tha
 None (but `domain_name` and `management_public_ip_addresses` are strongly recommended).
 
 #### Optional
-- `domain_name` - unique identifier for the domain.  The module will prefix it with `tf-`. _e.g._ `domain_name = foo` will result in a domain called `tf-foo`.
+- `domain_name` - unique identifier for the domain.
+- `domain_prefix` - A string to be prefixed to the domain, if `use_prefix` is true. Default is `tf-`. _e.g._ `domain_name = foo` will result in a domain called `tf-foo`.
+- `use_prefix` - A boolean flag indicating whether or not to use the domain_prefix. Default is `true`.
 - `es_version` - Elasticsearch version.
 - `instance_type` - Elasticsearch instance type to use for data nodes (and dedicated master nodes unless otherwise specified).
 - `instance_count` - Number of instances in the cluster.

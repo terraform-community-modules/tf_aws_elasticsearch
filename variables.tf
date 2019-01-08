@@ -1,5 +1,5 @@
 variable "domain_name" {
-  description = "Domain name for Elasticsearch cluster (will be prefixed with 'tf-')"
+  description = "Domain name for Elasticsearch cluster"
   default     = "es-domain"
 }
 
@@ -79,6 +79,16 @@ variable "tags" {
   description = "tags to apply to all resources"
   type        = "map"
   default     = {}
+}
+
+variable "use_prefix" {
+  description = "Flag indicating whether or not to use the domain_prefix. Default: true"
+  default     = true
+}
+
+variable "domain_prefix" {
+  description = "String to be prefixed to search domain. Default: tf-"
+  default     = "tf-"
 }
 
 # vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
