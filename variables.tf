@@ -91,5 +91,10 @@ variable "domain_prefix" {
   default     = "tf-"
 }
 
+variable "dedicated_master_threshold" {
+  description = "The number of instances above which dedicated master nodes will be used. Default: 10"
+  default     = 10
+}
+
 # vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
 

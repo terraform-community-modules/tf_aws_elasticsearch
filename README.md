@@ -17,7 +17,14 @@ If `vpc_options` option is set, Elasticsearch domain is created within a VPC. If
 
 NOTE: **You can either launch your domain within a VPC or use a public endpoint, but you can't do both.** Considering this, adding or removing `vpc_options` will force **DESTRUCTION** of the old Elasticsearch domain and **CREATION** of a new one. More INFO - [VPC support](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html)
 
-Several options affect the resilience and scalability of your Elasticsearch domain.  For a production deployment, set `instance_count` to an even number greater than or equal to 10 (the default is 6), choose an `instance_type` that is not in the T2 family, and set `es_zone_awareness` to `true`.  This will result in a cluster with three dedicated master nodes, balanced across two availability zones.
+Several options affect the resilience and scalability of your Elasticsearch domain.  For a production deployment:
+
+- set `instance_count` to an even number (default: `6`) greater than or equal to the `dedicated_master_threshold` (default: `10`)
+- choose an `instance_type` that is not in the T2 family
+- set `es_zone_awareness` to `true`.
+
+This will result in a cluster with three dedicated master nodes, balanced across two availability zones.
+
 
 For a production deployment it may also make sense to use EBS volumes rather that instance storage; to do so, set `ebs_volume_size` greater than 0 and optionally specify a value for `ebs_volume_type` (right now the only supported values are `gp2` and `magnetic`).
 
@@ -32,6 +39,7 @@ None (but `domain_name` and `management_public_ip_addresses` are strongly recomm
 - `es_version` - Elasticsearch version.
 - `instance_type` - Elasticsearch instance type to use for data nodes (and dedicated master nodes unless otherwise specified).
 - `instance_count` - Number of instances in the cluster.
+- `dedicated_master_threshold` - Number of instances above which dedicated master nodes will be used. Default is `10`
 - `dedicated_master_type` - Elasticsearch instance type to use for dedicated master nodes.
 - `management_iam_roles` - List of ARNs of IAM roles to be granted full access to the domain.
 - `management_public_ip_addresses` - List of IP addresses or CIDR blocks from which to permit full access to the domain.(Used only in Elasticsearch domains with public endpoints)
@@ -86,6 +94,30 @@ module "es" {
 
 
 ```
+
+Create small (4-node) Elasticsearch domain in a VPC with dedicated master nodes
+
+```hcl
+
+module "es" {
+  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch?ref=0.6.0"
+  domain_name                    = "my-elasticsearch-domain"
+  vpc_options                    = {
+    security_group_ids = ["sg-XXXXXXXX"]
+    subnet_ids         = ["subnet-YYYYYYYY"]
+  }
+  instance_count                 = 4
+  instance_type                  = "m4.2xlarge.elasticsearch"
+  dedicated_master_threshold     = 4
+  dedicated_master_type          = "m4.large.elasticsearch"
+  es_zone_awareness              = true
+  ebs_volume_size                = 100
+  ...
+}
+
+
+```
+
 Outputs
 =======
 - `arn` - ARN of the created Elasticsearch domain.
