@@ -43,9 +43,9 @@ resource "aws_elasticsearch_domain" "es_vpc" {
   cluster_config {
     instance_type            = "${var.instance_type}"
     instance_count           = "${var.instance_count}"
-    dedicated_master_enabled = "${var.instance_count >= 10 ? true : false}"
-    dedicated_master_count   = "${var.instance_count >= 10 ? 3 : 0}"
-    dedicated_master_type    = "${var.instance_count >= 10 ? (var.dedicated_master_type != "false" ? var.dedicated_master_type : var.instance_type) : ""}"
+    dedicated_master_enabled = "${var.instance_count >= var.dedicated_master_threshold ? true : false}"
+    dedicated_master_count   = "${var.instance_count >= var.dedicated_master_threshold ? 3 : 0}"
+    dedicated_master_type    = "${var.instance_count >= var.dedicated_master_threshold ? (var.dedicated_master_type != "false" ? var.dedicated_master_type : var.instance_type) : ""}"
     zone_awareness_enabled   = "${var.es_zone_awareness}"
   }
 
