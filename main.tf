@@ -28,9 +28,10 @@ data "aws_iam_policy_document" "es_management_access" {
 }
 
 resource "aws_elasticsearch_domain" "es" {
-  count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
-  domain_name           = "${local.domain_name}"
-  elasticsearch_version = "${var.es_version}"
+  count                  = "${length(var.vpc_options["subnet_ids"]) > 0 ? 0 : 1}"
+  domain_name            = "${local.domain_name}"
+  elasticsearch_version  = "${var.es_version}"
+  log_publishing_options = ["${var.log_publishing_options}"]
 
   cluster_config {
     instance_type            = "${var.instance_type}"

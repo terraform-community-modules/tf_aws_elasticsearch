@@ -31,9 +31,10 @@ data "aws_iam_policy_document" "es_vpc_management_access" {
 }
 
 resource "aws_elasticsearch_domain" "es_vpc" {
-  count                 = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
-  domain_name           = "${local.domain_name}"
-  elasticsearch_version = "${var.es_version}"
+  count                  = "${length(var.vpc_options["subnet_ids"]) > 0 ? 1 : 0}"
+  domain_name            = "${local.domain_name}"
+  elasticsearch_version  = "${var.es_version}"
+  log_publishing_options = ["${var.log_publishing_options}"]
 
   encrypt_at_rest = {
     enabled    = "${var.encrypt_at_rest}"

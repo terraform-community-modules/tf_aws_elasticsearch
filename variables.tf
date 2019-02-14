@@ -8,6 +8,12 @@ variable "es_version" {
   default     = "5.1"
 }
 
+variable "log_publishing_options" {
+  type        = "list"
+  description = "List of maps of log publishing options (default [])"
+  default     = []
+}
+
 variable "instance_type" {
   description = "ES instance type for data nodes in the cluster (default t2.small.elasticsearch)"
   default     = "t2.small.elasticsearch"

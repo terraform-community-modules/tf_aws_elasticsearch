@@ -118,6 +118,35 @@ module "es" {
 
 ```
 
+Create Elasticsearch with log publishing options
+
+```hcl
+locals {
+  log_publishing_options = [
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:..."
+      log_type = "INDEX_SLOW_LOGS"
+    },
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:..."
+      log_type = "ES_APPLICATION_LOGS"
+    },
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:..."
+      log_type = "SEARCH_SLOW_LOGS"
+    }
+  ]
+}
+
+module "elasticsearch" {
+  source                 = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  log_publishing_options = ["${local.log_publishing_options}"]
+  ...
+}
+
+```
+
+
 Outputs
 =======
 - `arn` - ARN of the created Elasticsearch domain.
