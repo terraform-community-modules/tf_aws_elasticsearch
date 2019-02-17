@@ -1,5 +1,4 @@
-tf_aws_elasticsearch
-===========
+# tf_aws_elasticsearch
 
 Terraform module for deploying and managing [Amazon Elasticsearch Service](https://aws.amazon.com/documentation/elasticsearch-service/).
 
@@ -25,43 +24,16 @@ Several options affect the resilience and scalability of your Elasticsearch doma
 
 This will result in a cluster with three dedicated master nodes, balanced across two availability zones.
 
-
 For a production deployment it may also make sense to use EBS volumes rather that instance storage; to do so, set `ebs_volume_size` greater than 0 and optionally specify a value for `ebs_volume_type` (right now the only supported values are `gp2` and `magnetic`).
 
-----------------------
-#### Required
-None (but `domain_name` and `management_public_ip_addresses` are strongly recommended).
 
-#### Optional
-- `domain_name` - unique identifier for the domain.
-- `domain_prefix` - A string to be prefixed to the domain, if `use_prefix` is true. Default is `tf-`. _e.g._ `domain_name = foo` will result in a domain called `tf-foo`.
-- `use_prefix` - A boolean flag indicating whether or not to use the domain_prefix. Default is `true`.
-- `es_version` - Elasticsearch version.
-- `instance_type` - Elasticsearch instance type to use for data nodes (and dedicated master nodes unless otherwise specified).
-- `instance_count` - Number of instances in the cluster.
-- `dedicated_master_threshold` - Number of instances above which dedicated master nodes will be used. Default is `10`
-- `dedicated_master_type` - Elasticsearch instance type to use for dedicated master nodes.
-- `management_iam_roles` - List of ARNs of IAM roles to be granted full access to the domain.
-- `management_public_ip_addresses` - List of IP addresses or CIDR blocks from which to permit full access to the domain.(Used only in Elasticsearch domains with public endpoints)
-- `es_zone_awareness` - Enable or disable zone awareness (balancing instances across multiple availability zones).  Note that setting this parameter to `true` and then requesting an odd number of nodes will result in an invalid cluster configuration.
-- `ebs_volume_size` - Size in GB of EBS volume to attach to each node and use for data storage.  If this parameter is set to 0 (the default), nodes will use instance storage.
-- `ebs_volume_type` - Storage class for EBS volumes.  Just use `gp2`.
-- `snapshot_start_hour` - Hour of the day (in UTC) at which to begin daily snapshots.
-- `tags` - Additional tags to apply to created resources
-- `vpc_options` - VPC related options. Adding or removing this configuration forces a new resource
+## Usage
 
-     `security_group_ids` - List of VPC Security Group IDs to be applied to the Elasticsearch domain endpoints.
-
-     `subnet_ids` - List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
-
-Usage
------
 Create Elasticsearch domain with public endpoint
 
 ```hcl
-
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch?ref=0.0.1"
+  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
   domain_name                    = "my-elasticsearch-domain"
   management_public_ip_addresses = ["34.203.XXX.YYY"]
   instance_count                 = 16
@@ -69,16 +41,14 @@ module "es" {
   dedicated_master_type          = "m4.large.elasticsearch"
   es_zone_awareness              = true
   ebs_volume_size                = 100
-  ...
 }
-
 ```
-Create Elasticsearch domain within a VPC
+
+Create Elasticsearch domain within a VPC and CloudWatch logs
 
 ```hcl
-
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch?ref=0.0.1"
+  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
     security_group_ids = ["sg-XXXXXXXX"]
@@ -89,18 +59,36 @@ module "es" {
   dedicated_master_type          = "t2.medium.elasticsearch"
   es_zone_awareness              = false
   ebs_volume_size                = 35
-  ...
+  
+  advanced_options = {
+    "rest.action.multi.allow_explicit_index" = "true"   # double quotes are required here
+  }
+
+  log_publishing_options = [
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:eu-central-1:604506250243:log-group:es:*"
+      log_type                 = "INDEX_SLOW_LOGS"
+      enabled                  = true
+    },
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:eu-central-1:604506250243:log-group:es:*"
+      log_type                 = "SEARCH_SLOW_LOGS"
+      enabled                  = true
+    },
+    {
+      cloudwatch_log_group_arn = "arn:aws:logs:eu-central-1:604506250243:log-group:es:*"
+      log_type                 = "ES_APPLICATION_LOGS"
+      enabled                  = true
+    }
+  ]
 }
-
-
 ```
 
 Create small (4-node) Elasticsearch domain in a VPC with dedicated master nodes
 
 ```hcl
-
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch?ref=0.6.0"
+  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
     security_group_ids = ["sg-XXXXXXXX"]
@@ -112,33 +100,54 @@ module "es" {
   dedicated_master_type          = "m4.large.elasticsearch"
   es_zone_awareness              = true
   ebs_volume_size                = 100
-  ...
 }
-
-
 ```
 
-Outputs
-=======
-- `arn` - ARN of the created Elasticsearch domain.
-- `domain_id` - Unique identifier for the domain.
-- `endpoint` - Domain-specific endpoint used to submit index, search, and data upload requests.  Kibana is available at `https://${endpoint}/_plugin/kibana/`.
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
 
-Authors
-=======
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map | `{}` | no |
+| dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | string | `"10"` | no |
+| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | string | `"false"` | no |
+| domain\_name | Domain name for Elasticsearch cluster | string | `"es-domain"` | no |
+| domain\_prefix | String to be prefixed to search domain. Default: tf- | string | `"tf-"` | no |
+| ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | string | `"0"` | no |
+| ebs\_volume\_type | Storage type of EBS volumes, if used (default gp2) | string | `"gp2"` | no |
+| encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | string | `"false"` | no |
+| es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
+| es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | string | `"false"` | no |
+| instance\_count | Number of data nodes in the cluster (default 6) | string | `"6"` | no |
+| instance\_type | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | string | `"t2.small.elasticsearch"` | no |
+| kms\_key\_id | KMS key used for elasticsearch | string | `""` | no |
+| log\_publishing\_options | List of maps of options for publishing slow logs to CloudWatch Logs. | list | `[]` | no |
+| management\_iam\_roles | List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list | `[ "*" ]` | no |
+| management\_public\_ip\_addresses | List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list | `[]` | no |
+| node\_to\_node\_encryption\_enabled | Whether to enable node-to-node encryption. | string | `"false"` | no |
+| snapshot\_start\_hour | Hour at which automated snapshots are taken, in UTC (default 0) | string | `"0"` | no |
+| tags | tags to apply to all resources | map | `{}` | no |
+| use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | string | `"true"` | no |
+| vpc\_options | A map of supported vpc options | map | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
 
-[Steve Huff](https://github.com/hakamadare)
-[Alexander Gramovich](https://github.com/ggramal)
+## Outputs
 
-Changelog
-=========
-0.1.0 - Add VPC support
+| Name | Description |
+|------|-------------|
+| arn | Amazon Resource Name (ARN) of the domain |
+| domain\_id | Unique identifier for the domain |
+| domain\_name | The name of the Elasticsearch domain |
+| endpoint | Domain-specific endpoint used to submit index, search, and data upload requests |
+| kibana\_endpoint | Domain-specific endpoint for kibana without https scheme |
 
-0.0.2 - Bugfix (#1) which prevented module from executing correctly with variable defaults.
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-0.0.1 - Initial release.
+## Authors
 
-License
-=======
+Originally created by [Steve Huff](https://github.com/hakamadare), [Alexander Gramovich](https://github.com/ggramal) and [these awesome contributors](https://github.com/terraform-community-modules/tf_aws_elasticsearch/graphs/contributors).
 
-This software is released under the MIT License (see `LICENSE.md`).
+Module managed by [Anton Babenko](https://github.com/antonbabenko).
+
+## License
+
+MIT licensed. See `LICENSE.md` for full details.
