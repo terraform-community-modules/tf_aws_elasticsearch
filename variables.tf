@@ -96,5 +96,17 @@ variable "dedicated_master_threshold" {
   default     = 10
 }
 
-# vim: set et fenc=utf-8 ff=unix ft=terraform sts=2 sw=2 ts=2 : 
+variable "advanced_options" {
+  description = "Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply."
+  default     = {}
+}
 
+variable "log_publishing_options" {
+  description = "List of maps of options for publishing slow logs to CloudWatch Logs."
+  default     = []
+}
+
+variable "node_to_node_encryption_enabled" {
+  description = "Whether to enable node-to-node encryption."
+  default     = false
+}
