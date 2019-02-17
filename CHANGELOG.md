@@ -1,6 +1,8 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+- Merge pull request [#22](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/22) from terraform-community-modules/few_improvements
+- Added support for the remaining arguments and attributes, including logging and auto-updated documentation. Fixes [#20](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/20), [#21](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/21), [#15](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/15).
 - Merge pull request [#19](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/19) from yo61/add_changelog
 - Support creation of CHANGELOG
 
