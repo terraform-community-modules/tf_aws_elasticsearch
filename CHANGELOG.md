@@ -1,6 +1,12 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+
+<a name="v0.7.0"></a>
+## [v0.7.0] - 2019-02-17
+
+- Updated changelog
 - Merge pull request [#22](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/22) from terraform-community-modules/few_improvements
 - Added support for the remaining arguments and attributes, including logging and auto-updated documentation. Fixes [#20](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/20), [#21](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/21), [#15](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/15).
 - Merge pull request [#19](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/19) from yo61/add_changelog
@@ -97,7 +103,8 @@
 - initial commit
 
 
-[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.7.0...HEAD
+[v0.7.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.3.0...v0.4.0
