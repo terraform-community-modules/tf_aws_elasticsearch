@@ -1,3 +1,8 @@
+variable "create_iam_service_linked_role" {
+  description = "Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account."
+  default     = true
+}
+
 variable "domain_name" {
   description = "Domain name for Elasticsearch cluster"
   default     = "es-domain"

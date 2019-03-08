@@ -109,6 +109,7 @@ module "es" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map | `{}` | no |
+| create\_iam\_service\_linked\_role | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | string | `"true"` | no |
 | dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | string | `"10"` | no |
 | dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | string | `"false"` | no |
 | domain\_name | Domain name for Elasticsearch cluster | string | `"es-domain"` | no |
