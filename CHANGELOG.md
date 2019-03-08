@@ -3,6 +3,14 @@
 
 
 
+<a name="v0.8.0"></a>
+## [v0.8.0] - 2019-03-08
+
+- Updated release makefile
+- Allow to create IAM service linked role conditionally
+- Updated changelog
+
+
 <a name="v0.7.0"></a>
 ## [v0.7.0] - 2019-02-17
 
@@ -103,7 +111,8 @@
 - initial commit
 
 
-[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.8.0...HEAD
+[v0.8.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.4.0...v0.5.0
