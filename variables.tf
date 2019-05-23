@@ -115,3 +115,18 @@ variable "node_to_node_encryption_enabled" {
   description = "Whether to enable node-to-node encryption."
   default     = false
 }
+
+variable "cognito_user_pool_id" {
+  description = "Optionally enable Amazon Cognito authentication with Kibana by specifying the Cognito user pool, Cognito identity pool, and role ARN."
+  default     = ""
+}
+
+variable "cognito_identity_pool_id" {
+  description = "Cognito identity pool for enabling Amazon Cognito authentication with Kibana."
+  default     = ""
+}
+
+variable "cognito_role_arn" {
+  description = "IAM role that has the AmazonESCognitoAccess policy attached for enabling Amazon Cognito authentication with Kibana."
+  default     = ""
+}

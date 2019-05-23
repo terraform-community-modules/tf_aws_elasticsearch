@@ -66,6 +66,13 @@ resource "aws_elasticsearch_domain" "es" {
     automated_snapshot_start_hour = "${var.snapshot_start_hour}"
   }
 
+  cognito_options {
+    enabled          = "${var.cognito_user_pool_id != "" ? true : false}"
+    user_pool_id     = "${var.cognito_user_pool_id}"
+    identity_pool_id = "${var.cognito_identity_pool_id}"
+    role_arn         = "${var.cognito_role_arn}"
+  }
+
   tags = "${merge(map("Domain", local.domain_name), var.tags)}"
 }
 
