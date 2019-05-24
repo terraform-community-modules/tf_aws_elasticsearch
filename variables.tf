@@ -127,6 +127,6 @@ variable "cognito_identity_pool_id" {
 }
 
 variable "cognito_role_arn" {
-  description = "IAM role that has the AmazonESCognitoAccess policy attached for enabling Amazon Cognito authentication with Kibana."
+  description = "IAM role that has the AmazonESCognitoAccess policy attached for enabling Amazon Cognito authentication with Kibana. Defaults to AWS managed policy."
   default     = ""
 }
