@@ -108,7 +108,7 @@ module "es" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map | `{}` | no |
+| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. Since an empty map also causes a perpetual diff, the default option for rest.action.multi.allow_explicit_index is specified here. | map | `{ "rest.action.multi.allow_explicit_index": "true" }` | no |
 | cognito\_identity\_pool\_id | Cognito identity pool for enabling Amazon Cognito authentication with Kibana. | string | `""` | no |
 | cognito\_role\_arn | IAM role that has the AmazonESCognitoAccess policy attached for enabling Amazon Cognito authentication with Kibana. Defaults to AWS managed policy. | string | `""` | no |
 | cognito\_user\_pool\_id | Optionally enable Amazon Cognito authentication with Kibana by specifying the Cognito user pool, Cognito identity pool, and role ARN. | string | `""` | no |
