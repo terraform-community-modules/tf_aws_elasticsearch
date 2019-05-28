@@ -99,7 +99,7 @@ resource "aws_elasticsearch_domain" "es" {
   }
 
   cognito_options {
-    enabled          = "${var.cognito_user_pool_id != "" ? true : false}"
+    enabled          = "${local.enable_cognito}"
     user_pool_id     = "${var.cognito_user_pool_id}"
     identity_pool_id = "${var.cognito_identity_pool_id}"
     role_arn         = "${var.cognito_role_arn == "" ? aws_iam_role.cognito_access.arn : var.cognito_role_arn}"
