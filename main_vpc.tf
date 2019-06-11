@@ -69,17 +69,9 @@ resource "aws_elasticsearch_domain" "es_vpc" {
     enabled = var.node_to_node_encryption_enabled
   }
 
-  dynamic "vpc_options" {
-    for_each = [var.vpc_options]
-    content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
-      security_group_ids = lookup(vpc_options.value, "security_group_ids", null)
-      subnet_ids         = lookup(vpc_options.value, "subnet_ids", null)
-    }
+  vpc_options {
+    subnet_ids         = var.vpc_options["subnet_ids"]
+    security_group_ids = var.vpc_options["security_group_ids"]
   }
 
   ebs_options {
