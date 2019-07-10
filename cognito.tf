@@ -4,8 +4,9 @@ data "aws_iam_policy" "cognito_access" {
 }
 
 resource "aws_iam_role" "cognito_access" {
-  count = "${var.cognito_role_arn == "" ? 1 : 0}"
-  name  = "CognitoAccessForAmazonES"
+  count       = "${var.cognito_role_arn == "" ? 1 : 0}"
+  name_prefix = "CognitoAccessForAmazonES"
+  tags        = "${var.tags}"
 
   assume_role_policy = <<EOF
 {
