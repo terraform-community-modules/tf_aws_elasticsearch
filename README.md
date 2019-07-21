@@ -39,7 +39,9 @@ Create Elasticsearch domain with public endpoint
 
 ```hcl
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  version = "~> 1.0"
+
   domain_name                    = "my-elasticsearch-domain"
   management_public_ip_addresses = ["34.203.XXX.YYY"]
   instance_count                 = 16
@@ -54,7 +56,9 @@ Create Elasticsearch domain within a VPC and CloudWatch logs
 
 ```hcl
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  version = "~> 1.0"
+
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
     security_group_ids = ["sg-XXXXXXXX"]
@@ -94,7 +98,9 @@ Create small (4-node) Elasticsearch domain in a VPC with dedicated master nodes
 
 ```hcl
 module "es" {
-  source                         = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
+  version = "~> 1.0"
+
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
     security_group_ids = ["sg-XXXXXXXX"]
@@ -114,28 +120,28 @@ module "es" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map | `{}` | no |
-| create\_iam\_service\_linked\_role | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | string | `"true"` | no |
-| dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | string | `"10"` | no |
-| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | string | `"false"` | no |
+| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map(string) | `{}` | no |
+| create\_iam\_service\_linked\_role | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | bool | `"true"` | no |
+| dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | number | `"10"` | no |
+| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | bool | `"false"` | no |
 | domain\_name | Domain name for Elasticsearch cluster | string | `"es-domain"` | no |
 | domain\_prefix | String to be prefixed to search domain. Default: tf- | string | `"tf-"` | no |
-| ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | string | `"0"` | no |
+| ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | number | `"0"` | no |
 | ebs\_volume\_type | Storage type of EBS volumes, if used (default gp2) | string | `"gp2"` | no |
-| encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | string | `"false"` | no |
+| encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | bool | `"false"` | no |
 | es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
-| es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | string | `"false"` | no |
-| instance\_count | Number of data nodes in the cluster (default 6) | string | `"6"` | no |
+| es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | bool | `"false"` | no |
+| instance\_count | Number of data nodes in the cluster (default 6) | number | `"6"` | no |
 | instance\_type | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | string | `"t2.small.elasticsearch"` | no |
 | kms\_key\_id | KMS key used for elasticsearch | string | `""` | no |
-| log\_publishing\_options | List of maps of options for publishing slow logs to CloudWatch Logs. | list | `[]` | no |
-| management\_iam\_roles | List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list | `[ "*" ]` | no |
-| management\_public\_ip\_addresses | List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list | `[]` | no |
-| node\_to\_node\_encryption\_enabled | Whether to enable node-to-node encryption. | string | `"false"` | no |
-| snapshot\_start\_hour | Hour at which automated snapshots are taken, in UTC (default 0) | string | `"0"` | no |
-| tags | tags to apply to all resources | map | `{}` | no |
-| use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | string | `"true"` | no |
-| vpc\_options | A map of supported vpc options | map | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
+| log\_publishing\_options | List of maps of options for publishing slow logs to CloudWatch Logs. | list(map(string)) | `[]` | no |
+| management\_iam\_roles | List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list(string) | `[ "*" ]` | no |
+| management\_public\_ip\_addresses | List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list(string) | `[]` | no |
+| node\_to\_node\_encryption\_enabled | Whether to enable node-to-node encryption. | bool | `"false"` | no |
+| snapshot\_start\_hour | Hour at which automated snapshots are taken, in UTC (default 0) | number | `"0"` | no |
+| tags | tags to apply to all resources | map(string) | `{}` | no |
+| use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | bool | `"true"` | no |
+| vpc\_options | A map of supported vpc options | map(list(string)) | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
 
 ## Outputs
 

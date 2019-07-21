@@ -1,6 +1,8 @@
-# Compiled files
-*.tfstate
-*.tfstate.backup
+.terraform
+terraform.tfstate
+*.tfstate*
+terraform.tfvars
+
 ### https://raw.github.com/github/gitignore/0a37e32c1d9914e9e5135e90faef42c75f8c5d2a/Global/Vim.gitignore
 
 # swap
@@ -24,7 +26,8 @@ tags
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
