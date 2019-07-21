@@ -39,8 +39,7 @@ Create Elasticsearch domain with public endpoint
 
 ```hcl
 module "es" {
-  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
-  version = "~> 1.0"
+  source  = "git::https://github.com/terraform-community-modules/tf_aws_elasticsearch.git?ref=v1.1.0"
 
   domain_name                    = "my-elasticsearch-domain"
   management_public_ip_addresses = ["34.203.XXX.YYY"]
@@ -56,8 +55,7 @@ Create Elasticsearch domain within a VPC and CloudWatch logs
 
 ```hcl
 module "es" {
-  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
-  version = "~> 1.0"
+  source  = "git::https://github.com/terraform-community-modules/tf_aws_elasticsearch.git?ref=v1.1.0"
 
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
@@ -98,8 +96,7 @@ Create small (4-node) Elasticsearch domain in a VPC with dedicated master nodes
 
 ```hcl
 module "es" {
-  source  = "github.com/terraform-community-modules/tf_aws_elasticsearch"
-  version = "~> 1.0"
+  source  = "git::https://github.com/terraform-community-modules/tf_aws_elasticsearch.git?ref=v1.1.0"
 
   domain_name                    = "my-elasticsearch-domain"
   vpc_options                    = {
