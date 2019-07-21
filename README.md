@@ -27,7 +27,13 @@ This will result in a cluster with three dedicated master nodes, balanced across
 For a production deployment it may also make sense to use EBS volumes rather that instance storage; to do so, set `ebs_volume_size` greater than 0 and optionally specify a value for `ebs_volume_type` (right now the only supported values are `gp2` and `magnetic`).
 
 
-## Usage
+## Terraform versions
+
+Terraform 0.12. Pin module version to `~> v1.0`. Submit pull-requests to `master` branch.
+
+Terraform 0.11. Pin module version to `~> v0.0`. Submit pull-requests to `terraform011` branch.
+
+# Usage
 
 Create Elasticsearch domain with public endpoint
 
