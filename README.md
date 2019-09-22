@@ -8,7 +8,7 @@ This module has two options for creating an Elasticsearch domain:
      * client IAM role
 
      See [this Stack Overflow post](http://stackoverflow.com/questions/32978026/proper-access-policy-for-amazon-elastic-search-cluster) for further discussion of access policies for Elasticsearch.
-  2) Create an Elasticsearch domain and join it to a VPC. Access policy is then based on he intersection of the following two criteria:
+  2) Create an Elasticsearch domain and join it to a VPC. Access policy is then based on the intersection of the following two criteria:
      * security groups applied to Elasticsearch domain
      * client IAM role
 
