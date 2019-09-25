@@ -59,9 +59,9 @@ variable "es_zone_awareness" {
 }
 
 variable "es_zone_awareness_count" {
-  description = "Number of availability zones used for data nodes (default 3)"
+  description = "Number of availability zones used for data nodes (default 2)"
   type        = number
-  default     = 3
+  default     = 2
 }
 
 variable "ebs_volume_size" {
