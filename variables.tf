@@ -30,8 +30,8 @@ variable "instance_count" {
 
 variable "dedicated_master_type" {
   description = "ES instance type to be used for dedicated masters (default same as instance_type)"
-  type        = bool
-  default     = false
+  type        = string
+  default     = "false"
 }
 
 variable "encrypt_at_rest" {
