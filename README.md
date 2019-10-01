@@ -128,6 +128,7 @@ module "es" {
 | encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | bool | `"false"` | no |
 | es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
 | es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | bool | `"false"` | no |
+| es\_zone\_awareness\_count | Set the number of zones for the Elasticsearch cluster zone awareness (default 2) | number | `"2"` | no |
 | instance\_count | Number of data nodes in the cluster (default 6) | number | `"6"` | no |
 | instance\_type | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | string | `"t2.small.elasticsearch"` | no |
 | kms\_key\_id | KMS key used for elasticsearch | string | `""` | no |

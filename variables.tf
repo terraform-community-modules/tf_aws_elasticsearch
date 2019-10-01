@@ -58,6 +58,12 @@ variable "es_zone_awareness" {
   default     = false
 }
 
+variable "es_zone_awareness_count" {
+  description = "Number of availability zones used for data nodes (default 2)"
+  type        = number
+  default     = 2
+}
+
 variable "ebs_volume_size" {
   description = "Optionally use EBS volumes for data storage by specifying volume size in GB (default 0)"
   type        = number
