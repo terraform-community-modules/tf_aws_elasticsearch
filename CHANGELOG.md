@@ -3,9 +3,19 @@
 
 
 
+<a name="v1.2.0"></a>
+## [v1.2.0] - 2019-10-01
+
+- Minor fixes in docs
+- Fix 'dedicated_master_type' variable type ([#37](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/37))
+- Add support for 'availability_zone_count' ([#38](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/38))
+- Correct a typo ([#36](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/36))
+
+
 <a name="v1.1.0"></a>
 ## [v1.1.0] - 2019-07-21
 
+- Updated CHANGELOG
 - Updated README with correct source links
 
 
@@ -126,7 +136,8 @@
 - initial commit
 
 
-[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.2.0...HEAD
+[v1.2.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.8.0...v1.0.0
 [v0.8.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.7.0...v0.8.0
