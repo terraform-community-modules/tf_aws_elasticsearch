@@ -120,7 +120,7 @@ module "es" {
 | advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map(string) | `{}` | no |
 | create\_iam\_service\_linked\_role | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | bool | `"true"` | no |
 | dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | number | `"10"` | no |
-| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | bool | `"false"` | no |
+| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | string | `"false"` | no |
 | domain\_name | Domain name for Elasticsearch cluster | string | `"es-domain"` | no |
 | domain\_prefix | String to be prefixed to search domain. Default: tf- | string | `"tf-"` | no |
 | ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | number | `"0"` | no |
@@ -128,7 +128,7 @@ module "es" {
 | encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | bool | `"false"` | no |
 | es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
 | es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | bool | `"false"` | no |
-| es\_zone\_awareness\_count | Set the number of zones for the Elasticsearch cluster zone awareness (default 2) | number | `"2"` | no |
+| es\_zone\_awareness\_count | Number of availability zones used for data nodes (default 2) | number | `"2"` | no |
 | instance\_count | Number of data nodes in the cluster (default 6) | number | `"6"` | no |
 | instance\_type | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | string | `"t2.small.elasticsearch"` | no |
 | kms\_key\_id | KMS key used for elasticsearch | string | `""` | no |
