@@ -3,9 +3,16 @@
 
 
 
+<a name="v1.3.0"></a>
+## [v1.3.0] - 2020-03-13
+
+- Add `dynamic` condition to inject or not `awarness_config` block ([#41](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/41))
+
+
 <a name="v1.2.0"></a>
 ## [v1.2.0] - 2019-10-01
 
+- Updated CHANGELOG
 - Minor fixes in docs
 - Fix 'dedicated_master_type' variable type ([#37](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/37))
 - Add support for 'availability_zone_count' ([#38](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/38))
@@ -136,7 +143,8 @@
 - initial commit
 
 
-[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.3.0...HEAD
+[v1.3.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v0.8.0...v1.0.0
