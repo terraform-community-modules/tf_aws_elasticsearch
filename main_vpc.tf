@@ -2,7 +2,7 @@
 does not handle properly null/empty "vpc_options" */
 
 data "aws_iam_policy_document" "es_vpc_management_access" {
-  count = local.inside_vpc ? 1 : 0
+  count = local.inside_vpc && var.create_management_access_policy ? 1 : 0
 
   statement {
     actions = [
@@ -99,7 +99,7 @@ resource "aws_elasticsearch_domain" "es_vpc" {
 }
 
 resource "aws_elasticsearch_domain_policy" "es_vpc_management_access" {
-  count = local.inside_vpc ? 1 : 0
+  count = local.inside_vpc && var.create_management_access_policy ? 1 : 0
 
   domain_name     = local.domain_name
   access_policies = data.aws_iam_policy_document.es_vpc_management_access[0].json

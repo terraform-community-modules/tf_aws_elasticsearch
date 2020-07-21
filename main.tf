@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "es_management_access" {
-  count = false == local.inside_vpc ? 1 : 0
+  count = false == local.inside_vpc && var.create_management_access_policy ? 1 : 0
 
   statement {
     actions = [
@@ -93,7 +93,7 @@ resource "aws_elasticsearch_domain" "es" {
 }
 
 resource "aws_elasticsearch_domain_policy" "es_management_access" {
-  count = false == local.inside_vpc ? 1 : 0
+  count = false == local.inside_vpc && var.create_management_access_policy ? 1 : 0
 
   domain_name     = local.domain_name
   access_policies = data.aws_iam_policy_document.es_management_access[0].json
