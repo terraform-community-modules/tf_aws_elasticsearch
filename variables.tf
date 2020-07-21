@@ -40,6 +40,12 @@ variable "encrypt_at_rest" {
   default     = false
 }
 
+variable "create_management_access_policy" {
+  description = "Whether to create the AWS Elasticsearch domain policy for management access"
+  type        = bool
+  default     = true
+}
+
 variable "management_iam_roles" {
   description = "List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access."
   type        = list(string)
