@@ -39,6 +39,11 @@ resource "aws_elasticsearch_domain" "es" {
     kms_key_id = var.kms_key_id
   }
 
+  domain_endpoint_options {
+    enforce_https       = var.enforce_https
+    tls_security_policy = var.tls_security_policy
+  }
+
   cluster_config {
     instance_type            = var.instance_type
     instance_count           = var.instance_count
