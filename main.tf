@@ -52,6 +52,9 @@ resource "aws_elasticsearch_domain" "es" {
         availability_zone_count = zone_awareness_config.value
       }
     }
+    warm_enabled = var.warm_enabled
+    warm_count   = var.warm_count
+    warm_type    = var.warm_type
   }
 
   advanced_options = var.advanced_options

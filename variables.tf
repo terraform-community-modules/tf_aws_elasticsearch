@@ -139,4 +139,20 @@ variable "node_to_node_encryption_enabled" {
   type        = bool
   default     = false
 }
+variable "warm_enabled" {
+  description = "Whether to enable ultrawarm."
+  type        = bool
+  default     = false
+}
 
+variable "warm_count" {
+  description = "Number of warm data nodes (default 2)"
+  type        = number
+  default     = 2
+}
+
+variable "warm_type" {
+  description = "UltraWarn instance type (default ultrawarm1.medium.elasticsearch)"
+  type        = string
+  default     = "ultrawarm1.medium.elasticsearch"
+}

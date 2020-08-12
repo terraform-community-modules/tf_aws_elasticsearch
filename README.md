@@ -72,6 +72,10 @@ module "es" {
     "rest.action.multi.allow_explicit_index" = "true"   # double quotes are required here
   }
 
+  warm_enabled = true
+  warm_count   = 2
+  warm_type    = ultrawarm1.medium.elasticsearch
+
   log_publishing_options = [
     {
       cloudwatch_log_group_arn = "arn:aws:logs:eu-central-1:604506250243:log-group:es:*"
@@ -140,6 +144,9 @@ module "es" {
 | tags | tags to apply to all resources | map(string) | `{}` | no |
 | use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | bool | `"true"` | no |
 | vpc\_options | A map of supported vpc options | map(list(string)) | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
+| warm\_count | Number of warm data nodes (default 2) | number | `2` | no |
+| warm\_enabled | Whether to enable ultrawarm. | bool | `"false"` | no |
+| warm\_type | UltraWarn instance type (default ultrawarm1.medium.elasticsearch) | string | `"ultrawarm1.medium.elasticsearch"` | no |
 
 ## Outputs
 
