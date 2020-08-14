@@ -53,8 +53,8 @@ resource "aws_elasticsearch_domain" "es" {
       }
     }
     warm_enabled = var.warm_enabled
-    warm_count   = var.warm_count
-    warm_type    = var.warm_type
+    warm_count   = var.warm_enabled ? var.warm_count : null
+    warm_type    = var.warm_enabled ? var.warm_type : null
   }
 
   advanced_options = var.advanced_options
