@@ -140,3 +140,20 @@ variable "node_to_node_encryption_enabled" {
   default     = false
 }
 
+variable "warm_enabled" {
+  description = "Whether to enable ultrawarm. Default: false"
+  type        = bool
+  default     = false
+}
+
+variable "warm_count" {
+  description = "Number of warm data nodes. Default: 0"
+  type        = number
+  default     = 0
+}
+
+variable "warm_type" {
+  description = "UltraWarn instance type. Default: \"\""
+  type        = string
+  default     = ""
+}
