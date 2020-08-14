@@ -144,9 +144,9 @@ module "es" {
 | tags | tags to apply to all resources | map(string) | `{}` | no |
 | use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | bool | `"true"` | no |
 | vpc\_options | A map of supported vpc options | map(list(string)) | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
-| warm\_count | Number of warm data nodes. (default 0) | number | `0` | no |
-| warm\_enabled | Whether to enable ultrawarm. (default false) | bool | `"false"` | no |
-| warm\_type | UltraWarn instance type (default "") | string | `""` | no |
+| warm\_count | Number of warm data nodes. Default: 0 | number | `0` | no |
+| warm\_enabled | Whether to enable ultrawarm. Default: false | bool | `"false"` | no |
+| warm\_type | UltraWarn instance type. Default: \"\" | string | `""` | no |
 
 ## Outputs
 
