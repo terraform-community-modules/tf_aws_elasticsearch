@@ -141,19 +141,19 @@ variable "node_to_node_encryption_enabled" {
 }
 
 variable "warm_enabled" {
-  description = "Whether to enable ultrawarm."
+  description = "Whether to enable ultrawarm. Default: false"
   type        = bool
   default     = false
 }
 
 variable "warm_count" {
-  description = "Number of warm data nodes. Default: 10 when warm_enabled=true"
+  description = "Number of warm data nodes. Default: 0"
   type        = number
   default     = 0
 }
 
 variable "warm_type" {
-  description = "UltraWarn instance type. Default: ultrawarm1.medium.elasticsearch when warm_enabled=true"
+  description = "UltraWarn instance type. Default: \"\""
   type        = string
   default     = ""
 }
