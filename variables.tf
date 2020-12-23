@@ -140,3 +140,14 @@ variable "node_to_node_encryption_enabled" {
   default     = false
 }
 
+variable "enforce_https" {
+  description = "Whether or not to require HTTPS."
+  type        = bool
+  default     = false
+}
+
+variable "tls_security_policy" {
+  description = "The name of the TLS security policy that needs to be applied to the HTTPS endpoint. Example values: Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07. Terraform will only perform drift detection if a configuration value is provided."
+  type        = string
+  default     = null
+}

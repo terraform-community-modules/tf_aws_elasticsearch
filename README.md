@@ -126,6 +126,7 @@ module "es" {
 | ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | number | `"0"` | no |
 | ebs\_volume\_type | Storage type of EBS volumes, if used (default gp2) | string | `"gp2"` | no |
 | encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | bool | `"false"` | no |
+| enforce\_https | Whether or not to require HTTPS. | bool | `"false"` | no |
 | es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
 | es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | bool | `"false"` | no |
 | es\_zone\_awareness\_count | Number of availability zones used for data nodes (default 2) | number | `"2"` | no |
@@ -138,6 +139,7 @@ module "es" {
 | node\_to\_node\_encryption\_enabled | Whether to enable node-to-node encryption. | bool | `"false"` | no |
 | snapshot\_start\_hour | Hour at which automated snapshots are taken, in UTC (default 0) | number | `"0"` | no |
 | tags | tags to apply to all resources | map(string) | `{}` | no |
+| tls\_security\_policy | The name of the TLS security policy that needs to be applied to the HTTPS endpoint. Example values: Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07. Terraform will only perform drift detection if a configuration value is provided. | string | `"null"` | no |
 | use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | bool | `"true"` | no |
 | vpc\_options | A map of supported vpc options | map(list(string)) | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
 
