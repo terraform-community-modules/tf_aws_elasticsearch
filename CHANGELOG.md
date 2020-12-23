@@ -3,9 +3,16 @@
 
 
 
+<a name="v1.4.0"></a>
+## [v1.4.0] - 2020-12-23
+
+- add option to set enforce_https ([#47](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/47))
+
+
 <a name="v1.3.0"></a>
 ## [v1.3.0] - 2020-03-13
 
+- Updated CHANGELOG
 - Add `dynamic` condition to inject or not `awarness_config` block ([#41](https://github.com/terraform-community-modules/tf_aws_elasticsearch/issues/41))
 
 
@@ -143,7 +150,8 @@
 - initial commit
 
 
-[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.4.0...HEAD
+[v1.4.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.3.0...v1.4.0
 [v1.3.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/terraform-community-modules/tf_aws_elasticsearch/compare/v1.0.0...v1.1.0
