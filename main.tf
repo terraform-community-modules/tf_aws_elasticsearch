@@ -59,8 +59,6 @@ resource "aws_elasticsearch_domain" "es" {
     }
   }
 
-  advanced_options = var.advanced_options
-
   dynamic "log_publishing_options" {
     for_each = var.log_publishing_options
     content {
@@ -95,6 +93,15 @@ resource "aws_elasticsearch_domain" "es" {
     },
     var.tags,
   )
+
+  # Why ignore this? AWS changes these without telling us and they are sometimes inconsistent across clusters.
+  # Also: there is some bug in TF (or AWS) where this field always shows up as a diff...
+  # If we really need to set this and manage it with TF let's revisit:
+  # https://app.shortcut.com/launchdarkly/story/148732/fix-constant-terraform-diff-in-elasticsearch-terraform
+  lifecycle {
+    ignore_changes = [advanced_options]
+  }
+
 }
 
 resource "aws_elasticsearch_domain_policy" "es_management_access" {
