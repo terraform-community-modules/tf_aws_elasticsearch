@@ -113,46 +113,77 @@ module "es" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_elasticsearch_domain.es](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain) | resource |
+| [aws_elasticsearch_domain.es_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain) | resource |
+| [aws_elasticsearch_domain_policy.es_management_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain_policy) | resource |
+| [aws_elasticsearch_domain_policy.es_vpc_management_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain_policy) | resource |
+| [aws_iam_service_linked_role.es](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_linked_role) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.es_management_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.es_vpc_management_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| advanced\_options | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | map(string) | `{}` | no |
-| create\_iam\_service\_linked\_role | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | bool | `"true"` | no |
-| dedicated\_master\_threshold | The number of instances above which dedicated master nodes will be used. Default: 10 | number | `"10"` | no |
-| dedicated\_master\_type | ES instance type to be used for dedicated masters (default same as instance_type) | string | `"false"` | no |
-| domain\_name | Domain name for Elasticsearch cluster | string | `"es-domain"` | no |
-| domain\_prefix | String to be prefixed to search domain. Default: tf- | string | `"tf-"` | no |
-| ebs\_volume\_size | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | number | `"0"` | no |
-| ebs\_volume\_type | Storage type of EBS volumes, if used (default gp2) | string | `"gp2"` | no |
-| encrypt\_at\_rest | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | bool | `"false"` | no |
-| enforce\_https | Whether or not to require HTTPS. | bool | `"false"` | no |
-| es\_version | Version of Elasticsearch to deploy (default 5.1) | string | `"5.1"` | no |
-| es\_zone\_awareness | Enable zone awareness for Elasticsearch cluster (default false) | bool | `"false"` | no |
-| es\_zone\_awareness\_count | Number of availability zones used for data nodes (default 2) | number | `"2"` | no |
-| instance\_count | Number of data nodes in the cluster (default 6) | number | `"6"` | no |
-| instance\_type | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | string | `"t2.small.elasticsearch"` | no |
-| kms\_key\_id | KMS key used for elasticsearch | string | `""` | no |
-| log\_publishing\_options | List of maps of options for publishing slow logs to CloudWatch Logs. | list(map(string)) | `[]` | no |
-| management\_iam\_roles | List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list(string) | `[ "*" ]` | no |
-| management\_public\_ip\_addresses | List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | list(string) | `[]` | no |
-| node\_to\_node\_encryption\_enabled | Whether to enable node-to-node encryption. | bool | `"false"` | no |
-| snapshot\_start\_hour | Hour at which automated snapshots are taken, in UTC (default 0) | number | `"0"` | no |
-| tags | tags to apply to all resources | map(string) | `{}` | no |
-| tls\_security\_policy | The name of the TLS security policy that needs to be applied to the HTTPS endpoint. Example values: Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07. Terraform will only perform drift detection if a configuration value is provided. | string | `"null"` | no |
-| use\_prefix | Flag indicating whether or not to use the domain_prefix. Default: true | bool | `"true"` | no |
-| vpc\_options | A map of supported vpc options | map(list(string)) | `{ "security_group_ids": [], "subnet_ids": [] }` | no |
+|------|-------------|------|---------|:--------:|
+| <a name="input_advanced_options"></a> [advanced\_options](#input\_advanced\_options) | Map of key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply. | `map(string)` | `{}` | no |
+| <a name="input_advanced_security_options_enabled"></a> [advanced\_security\_options\_enabled](#input\_advanced\_security\_options\_enabled) | Whether advanced security is enabled. | `bool` | `true` | no |
+| <a name="input_advanced_security_options_internal_user_database_enabled"></a> [advanced\_security\_options\_internal\_user\_database\_enabled](#input\_advanced\_security\_options\_internal\_user\_database\_enabled) | Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin | `bool` | `false` | no |
+| <a name="input_advanced_security_options_master_user_name"></a> [advanced\_security\_options\_master\_user\_name](#input\_advanced\_security\_options\_master\_user\_name) | Master user username (applicable if advanced\_security\_options\_internal\_user\_database\_enabled set to true) | `string` | `null` | no |
+| <a name="input_advanced_security_options_master_user_password"></a> [advanced\_security\_options\_master\_user\_password](#input\_advanced\_security\_options\_master\_user\_password) | Master user password (applicable if advanced\_security\_options\_internal\_user\_database\_enabled set to true) | `string` | `null` | no |
+| <a name="input_create_iam_service_linked_role"></a> [create\_iam\_service\_linked\_role](#input\_create\_iam\_service\_linked\_role) | Whether to create IAM service linked role for AWS ElasticSearch service. Can be only one per AWS account. | `bool` | `true` | no |
+| <a name="input_dedicated_master_threshold"></a> [dedicated\_master\_threshold](#input\_dedicated\_master\_threshold) | The number of instances above which dedicated master nodes will be used. Default: 10 | `number` | `10` | no |
+| <a name="input_dedicated_master_type"></a> [dedicated\_master\_type](#input\_dedicated\_master\_type) | ES instance type to be used for dedicated masters (default same as instance\_type) | `string` | `"false"` | no |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name for Elasticsearch cluster | `string` | `"es-domain"` | no |
+| <a name="input_domain_prefix"></a> [domain\_prefix](#input\_domain\_prefix) | String to be prefixed to search domain. Default: tf- | `string` | `"tf-"` | no |
+| <a name="input_ebs_volume_size"></a> [ebs\_volume\_size](#input\_ebs\_volume\_size) | Optionally use EBS volumes for data storage by specifying volume size in GB (default 0) | `number` | `0` | no |
+| <a name="input_ebs_volume_type"></a> [ebs\_volume\_type](#input\_ebs\_volume\_type) | Storage type of EBS volumes, if used (default gp2) | `string` | `"gp2"` | no |
+| <a name="input_encrypt_at_rest"></a> [encrypt\_at\_rest](#input\_encrypt\_at\_rest) | Enable encrption at rest (only specific instance family types support it: m4, c4, r4, i2, i3 default: false) | `bool` | `false` | no |
+| <a name="input_enforce_https"></a> [enforce\_https](#input\_enforce\_https) | Whether or not to require HTTPS. | `bool` | `false` | no |
+| <a name="input_es_version"></a> [es\_version](#input\_es\_version) | Version of Elasticsearch to deploy (default 5.1) | `string` | `"5.1"` | no |
+| <a name="input_es_zone_awareness"></a> [es\_zone\_awareness](#input\_es\_zone\_awareness) | Enable zone awareness for Elasticsearch cluster (default false) | `bool` | `false` | no |
+| <a name="input_es_zone_awareness_count"></a> [es\_zone\_awareness\_count](#input\_es\_zone\_awareness\_count) | Number of availability zones used for data nodes (default 2) | `number` | `2` | no |
+| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of data nodes in the cluster (default 6) | `number` | `6` | no |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | ES instance type for data nodes in the cluster (default t2.small.elasticsearch) | `string` | `"t2.small.elasticsearch"` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | KMS key used for elasticsearch | `string` | `""` | no |
+| <a name="input_log_publishing_options"></a> [log\_publishing\_options](#input\_log\_publishing\_options) | List of maps of options for publishing slow logs to CloudWatch Logs. | `list(map(string))` | `[]` | no |
+| <a name="input_management_iam_roles"></a> [management\_iam\_roles](#input\_management\_iam\_roles) | List of IAM role ARNs from which to permit management traffic (default ['*']).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
+| <a name="input_management_public_ip_addresses"></a> [management\_public\_ip\_addresses](#input\_management\_public\_ip\_addresses) | List of IP addresses from which to permit management traffic (default []).  Note that a client must match both the IP address and the IAM role patterns in order to be permitted access. | `list(string)` | `[]` | no |
+| <a name="input_master_user_arn"></a> [master\_user\_arn](#input\_master\_user\_arn) | The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request. | `string` | `""` | no |
+| <a name="input_node_to_node_encryption_enabled"></a> [node\_to\_node\_encryption\_enabled](#input\_node\_to\_node\_encryption\_enabled) | Whether to enable node-to-node encryption. | `bool` | `false` | no |
+| <a name="input_snapshot_start_hour"></a> [snapshot\_start\_hour](#input\_snapshot\_start\_hour) | Hour at which automated snapshots are taken, in UTC (default 0) | `number` | `0` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | tags to apply to all resources | `map(string)` | `{}` | no |
+| <a name="input_tls_security_policy"></a> [tls\_security\_policy](#input\_tls\_security\_policy) | The name of the TLS security policy that needs to be applied to the HTTPS endpoint. Example values: Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07. Terraform will only perform drift detection if a configuration value is provided. | `string` | `null` | no |
+| <a name="input_use_prefix"></a> [use\_prefix](#input\_use\_prefix) | Flag indicating whether or not to use the domain\_prefix. Default: true | `bool` | `true` | no |
+| <a name="input_vpc_options"></a> [vpc\_options](#input\_vpc\_options) | A map of supported vpc options | `map(list(string))` | <pre>{<br>  "security_group_ids": [],<br>  "subnet_ids": []<br>}</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | Amazon Resource Name (ARN) of the domain |
-| domain\_id | Unique identifier for the domain |
-| domain\_name | The name of the Elasticsearch domain |
-| endpoint | Domain-specific endpoint used to submit index, search, and data upload requests |
-| kibana\_endpoint | Domain-specific endpoint for kibana without https scheme |
-
+| <a name="output_arn"></a> [arn](#output\_arn) | Amazon Resource Name (ARN) of the domain |
+| <a name="output_domain_id"></a> [domain\_id](#output\_domain\_id) | Unique identifier for the domain |
+| <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name) | The name of the Elasticsearch domain |
+| <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | Domain-specific endpoint used to submit index, search, and data upload requests |
+| <a name="output_kibana_endpoint"></a> [kibana\_endpoint](#output\_kibana\_endpoint) | Domain-specific endpoint for kibana without https scheme |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
