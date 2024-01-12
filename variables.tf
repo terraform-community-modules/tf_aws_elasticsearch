@@ -128,6 +128,36 @@ variable "advanced_options" {
   default     = {}
 }
 
+variable "advanced_security_options_enabled" {
+  description = "Whether advanced security is enabled."
+  type        = bool
+  default     = true
+}
+
+variable "advanced_security_options_internal_user_database_enabled" {
+  description = "Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin"
+  type        = bool
+  default     = false
+}
+
+variable "advanced_security_options_master_user_name" {
+  description = "Master user username (applicable if advanced_security_options_internal_user_database_enabled set to true)"
+  type        = string
+  default     = null
+}
+
+variable "advanced_security_options_master_user_password" {
+  description = "Master user password (applicable if advanced_security_options_internal_user_database_enabled set to true)"
+  type        = string
+  default     = null
+}
+
+variable "master_user_arn" {
+  description = "The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request."
+  type        = string
+  default     = ""
+}
+
 variable "log_publishing_options" {
   description = "List of maps of options for publishing slow logs to CloudWatch Logs."
   type        = list(map(string))

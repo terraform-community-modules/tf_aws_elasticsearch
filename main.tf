@@ -61,6 +61,20 @@ resource "aws_elasticsearch_domain" "es" {
 
   advanced_options = var.advanced_options
 
+  dynamic "advanced_security_options" {
+    for_each = var.advanced_security_options_enabled ? [true] : []
+    content {
+      enabled                        = var.advanced_security_options_enabled
+      internal_user_database_enabled = var.advanced_security_options_internal_user_database_enabled
+
+      master_user_options {
+        master_user_arn      = var.advanced_security_options_internal_user_database_enabled ? null : (var.master_user_arn != "" ? var.master_user_arn : data.aws_caller_identity.current.arn)
+        master_user_name     = var.advanced_security_options_internal_user_database_enabled ? var.advanced_security_options_master_user_name : null
+        master_user_password = var.advanced_security_options_internal_user_database_enabled ? var.advanced_security_options_master_user_password : null
+      }
+    }
+  }
+
   dynamic "log_publishing_options" {
     for_each = var.log_publishing_options
     content {
